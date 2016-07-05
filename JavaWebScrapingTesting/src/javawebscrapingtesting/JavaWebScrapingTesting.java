@@ -28,11 +28,9 @@ public class JavaWebScrapingTesting {
             Elements tr = tbody.first().getElementsByTag("tr");
             
             for (Element td : tr){
-                Elements times = td.getElementsByClass("time");
+                Service service = Service.processRawData(td);
                 
-                for (Element time : times){
-                    System.out.println(time.text());
-                }
+                System.out.println(service);
             }
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
