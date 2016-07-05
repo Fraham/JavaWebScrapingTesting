@@ -9,6 +9,6 @@ package javawebscrapingtesting;
  *
  * @author Graham
  */
-public class WeekTimetable extends Timetable {
+public class WeekTimetable {
     
 }

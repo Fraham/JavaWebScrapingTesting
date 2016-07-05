@@ -59,9 +59,8 @@ public class Service {
         Service newService = new Service();
 
         Elements rawTDS = rawService.getElementsByTag("td");
-System.out.println(rawTDS);
+        
         for (int i = 0; i < rawTDS.size(); i++) {
-            
             Element element = rawTDS.get(i);
 
             if (i == 0) {
@@ -92,7 +91,7 @@ System.out.println(rawTDS);
 
     @Override
     public String toString() {
-        return "Service{" + "ind=" + ind + ", plannedArrival=" + plannedArrival + ", actualArrival=" + actualArrival + ", origin=" + origin + ", platform=" + platform + ", id=" + id + ", trainOperatorID=" + trainOperatorID + ", destination=" + destination + ", plannedDeparture=" + plannedDeparture + ", actualDeparture=" + actualDeparture + '}';
+        return "\n" + "Service{" + "ind=" + ind + ", plannedArrival=" + plannedArrival + ", actualArrival=" + actualArrival + ", origin=" + origin + ", platform=" + platform + ", id=" + id + ", trainOperatorID=" + trainOperatorID + ", destination=" + destination + ", plannedDeparture=" + plannedDeparture + ", actualDeparture=" + actualDeparture + '}';
     }
 
     /**
