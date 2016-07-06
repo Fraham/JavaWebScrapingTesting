@@ -23,20 +23,22 @@ public class DayTimetable extends Timetable {
         super(station);
 
         setDate(date);
-        
-        getTimetable();
+
+        getDayTimetable();
     }
 
-    public void getTimetable() {
+    public void getDayTimetable() {
         try {
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
-            
+
             Document doc = Jsoup.connect(String.format("http://www.realtimetrains.co.uk/search/advanced/%s/%s/0000-2359?stp=WVS&show=freight&order=wtt", getStation().getCodeName(), dateFormat.format(date.getTime()))).get();
-            
+
             Elements tables = doc.getElementsByClass("table");
             Element table = tables.first();
-            Element tbody = table.getElementsByTag("tbody").first();
-            setServices(Timetable.processRawTimetable(tbody));
+            if (table != null) {
+                Element tbody = table.getElementsByTag("tbody").first();
+                setServices(Timetable.processRawTimetable(tbody));
+            }
         } catch (IOException ex) {
             Logger.getLogger(DayTimetable.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -58,8 +60,7 @@ public class DayTimetable extends Timetable {
 
     @Override
     public String toString() {
-        return "DayTimetable{" + "date=" + date.getTime() + ", " + super.toString() + '}';
+        return "\nDayTimetable{" + "date=" + date.getTime() + ",\n" + super.toString() + '}';
     }
-    
-    
+
 }

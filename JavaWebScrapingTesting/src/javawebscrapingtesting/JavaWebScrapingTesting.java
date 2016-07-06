@@ -41,8 +41,11 @@ public class JavaWebScrapingTesting {
             System.out.println(ex.getMessage());
         }*/
         
-        DayTimetable dt = new DayTimetable(new Station("Rainford", "RNF"), Calendar.getInstance());
-        System.out.println(dt);
+        /*DayTimetable dt = new DayTimetable(new Station("Rainford", "RNF"), Calendar.getInstance());
+        System.out.println(dt);*/
+        
+        WeekTimetable wt = new WeekTimetable(new Station("Rainford", "RNF"), Calendar.getInstance());
+        System.out.println(wt);
     }
 
     /**
