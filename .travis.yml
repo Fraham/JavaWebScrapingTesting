@@ -1,2 +1,2 @@
 language: java
-script: ant JavaWebScrapingTesting/default
+script: ant -file JavaWebScrapingTesting/build.xml
