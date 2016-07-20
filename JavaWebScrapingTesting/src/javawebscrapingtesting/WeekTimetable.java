@@ -17,8 +17,6 @@ public class WeekTimetable {
     public WeekTimetable(Station station, Calendar startDate){
         this.setStartDate(startDate);
         this.setStation(station);
-        
-        getWeekTimetable();
     }
     
     public void getWeekTimetable(){
@@ -30,7 +28,9 @@ public class WeekTimetable {
         
         for (int i = 0; i < 7; i++){
             currentDate.add(Calendar.DAY_OF_MONTH, 1);
-            days.add(new DayTimetable(this.getStation(), (Calendar)currentDate.clone()));
+            DayTimetable day = new DayTimetable(this.getStation(), (Calendar)currentDate.clone());
+            day.getDayTimetable();
+            days.add(day);
         }
     }
 

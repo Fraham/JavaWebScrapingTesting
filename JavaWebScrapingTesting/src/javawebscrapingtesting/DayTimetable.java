@@ -22,8 +22,6 @@ public class DayTimetable extends Timetable {
         super(station);
 
         setDate(date);
-
-        getDayTimetable();
     }
 
     public void getDayTimetable() {
