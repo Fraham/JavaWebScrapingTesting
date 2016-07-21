@@ -16,11 +16,17 @@ public class DaysTimetable {
     private Station station;
 
     private int numberOfDays;
+    
+    private boolean passenger;
+    private boolean freight;
 
-    public DaysTimetable(Station station, Calendar startDate, int numberOfDays) {
+    public DaysTimetable(Station station, Calendar startDate, int numberOfDays, boolean passenger, boolean freight) {
         this.setStartDate(startDate);
         this.setStation(station);
         this.setNumberOfDays(numberOfDays);
+        
+        setPassenger(passenger);
+        setFreight(freight);
     }
 
     public void getTimetable() {
@@ -28,13 +34,12 @@ public class DaysTimetable {
 
         Calendar currentDate = (Calendar) this.getStartDate().clone();
 
-        currentDate.add(Calendar.DAY_OF_MONTH, -1);
-
         for (int i = 0; i < getNumberOfDays(); i++) {
-            currentDate.add(Calendar.DAY_OF_MONTH, 1);
-            DayTimetable day = new DayTimetable(this.getStation(), (Calendar) currentDate.clone());
+            DayTimetable day = new DayTimetable(this.getStation(), (Calendar) currentDate.clone(), this.isPassenger(), this.isFreight());
             day.getDayTimetable();
             getDays().add(day);
+            
+            currentDate.add(Calendar.DAY_OF_MONTH, 1);
         }
     }
 
@@ -97,5 +102,33 @@ public class DaysTimetable {
     @Override
     public String toString() {
         return "Days Timetable{" + "Start Date=" + startDate.getTime() + ",\nDays=" + days + '}';
+    }
+
+    /**
+     * @return the passenger
+     */
+    public boolean isPassenger() {
+        return passenger;
+    }
+
+    /**
+     * @param passenger the passenger to set
+     */
+    public void setPassenger(boolean passenger) {
+        this.passenger = passenger;
+    }
+
+    /**
+     * @return the freight
+     */
+    public boolean isFreight() {
+        return freight;
+    }
+
+    /**
+     * @param freight the freight to set
+     */
+    public void setFreight(boolean freight) {
+        this.freight = freight;
     }
 }

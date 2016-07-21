@@ -52,6 +52,8 @@ public class MainDisplay extends javax.swing.JFrame {
         tblTimetable = new javax.swing.JTable();
         lblDays = new javax.swing.JLabel();
         spnDays = new javax.swing.JSpinner();
+        chkPassenger = new javax.swing.JCheckBox();
+        chkFreight = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -98,6 +100,12 @@ public class MainDisplay extends javax.swing.JFrame {
 
         spnDays.setValue(1);
 
+        chkPassenger.setSelected(true);
+        chkPassenger.setText("Passenger");
+
+        chkFreight.setSelected(true);
+        chkFreight.setText("Freight");
+
         javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
         mainPanel.setLayout(mainPanelLayout);
         mainPanelLayout.setHorizontalGroup(
@@ -105,7 +113,9 @@ public class MainDisplay extends javax.swing.JFrame {
             .addGroup(mainPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(mainPanelLayout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())
                     .addGroup(mainPanelLayout.createSequentialGroup()
                         .addComponent(lblStation)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -118,10 +128,13 @@ public class MainDisplay extends javax.swing.JFrame {
                         .addComponent(lblDays)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(spnDays, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(chkPassenger)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(chkFreight)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 280, Short.MAX_VALUE)
                         .addComponent(btnAccept)
-                        .addGap(0, 440, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addGap(34, 34, 34))))
         );
         mainPanelLayout.setVerticalGroup(
             mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -134,9 +147,11 @@ public class MainDisplay extends javax.swing.JFrame {
                     .addComponent(txtDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnAccept)
                     .addComponent(lblDays)
-                    .addComponent(spnDays, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(spnDays, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(chkPassenger)
+                    .addComponent(chkFreight))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 310, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 758, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -163,8 +178,15 @@ public class MainDisplay extends javax.swing.JFrame {
             date.setTime(sdf.parse(txtDate.getText()));
 
             Station station = Station.findStationFromName(cmbStation.getSelectedItem().toString());
+            
+            boolean passenger = chkPassenger.isSelected();
+            boolean freight = chkFreight.isSelected();
+            
+            if (!passenger  && !freight){
+                //error
+            }
 
-            DaysTimetable timetable = new DaysTimetable(station, date, Integer.parseInt(spnDays.getValue().toString()));
+            DaysTimetable timetable = new DaysTimetable(station, date, Integer.parseInt(spnDays.getValue().toString()), passenger, freight);
             timetable.getTimetable();
 
             DefaultTableModel model = (DefaultTableModel) tblTimetable.getModel();
@@ -217,6 +239,8 @@ public class MainDisplay extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAccept;
+    private javax.swing.JCheckBox chkFreight;
+    private javax.swing.JCheckBox chkPassenger;
     private javax.swing.JComboBox<String> cmbStation;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblDate;

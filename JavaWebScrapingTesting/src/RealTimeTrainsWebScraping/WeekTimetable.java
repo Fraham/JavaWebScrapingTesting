@@ -15,8 +15,8 @@ public class WeekTimetable extends DaysTimetable {
 
     private Station station;
 
-    public WeekTimetable(Station station, Calendar startDate) {
-        super(station, startDate, 7);
+    public WeekTimetable(Station station, Calendar startDate, boolean passenger, boolean freight) {
+        super(station, startDate, 7, passenger, freight);
     }
 
     @Override

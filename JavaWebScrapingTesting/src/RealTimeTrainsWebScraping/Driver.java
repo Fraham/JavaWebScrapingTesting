@@ -12,9 +12,9 @@ import javax.swing.JPanel;
 public class Driver {
 
     public Driver() {
-        WeekTimetable wt = new WeekTimetable(new Station("Rainford", "RNF"), Calendar.getInstance());
+        /*WeekTimetable wt = new WeekTimetable(new Station("Rainford", "RNF"), Calendar.getInstance());
         wt.getTimetable();
-        System.out.println(wt);
+        System.out.println(wt);*/
     }
 
     /**
