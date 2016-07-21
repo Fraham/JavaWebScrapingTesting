@@ -65,6 +65,9 @@ public class Timetable {
      * @return the services
      */
     public ArrayList<Service> getServices() {
+        if (services == null)
+            services = new ArrayList<>();
+        
         return services;
     }
 

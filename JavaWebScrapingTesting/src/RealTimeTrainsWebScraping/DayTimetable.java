@@ -2,7 +2,9 @@ package RealTimeTrainsWebScraping;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.jsoup.Jsoup;
@@ -39,6 +41,19 @@ public class DayTimetable extends Timetable {
         } catch (IOException ex) {
             Logger.getLogger(DayTimetable.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    public List<Object []> getDatedServices(){
+        List<Object []> datedServices = new ArrayList<>();
+        
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            
+        for (Service service : getServices()){
+            List list = service.toList();
+            list.add(sdf.format(date.getTime()));
+            datedServices.add(list.toArray());                    
+        }
+        return datedServices;
     }
 
     /**

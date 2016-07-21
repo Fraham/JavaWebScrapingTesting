@@ -1,5 +1,7 @@
 package RealTimeTrainsWebScraping;
 
+import java.util.ArrayList;
+import java.util.List;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
@@ -92,6 +94,23 @@ public class Service {
     @Override
     public String toString() {
         return "\n" + "Service{" + "ind=" + ind + ", plannedArrival=" + plannedArrival + ", actualArrival=" + actualArrival + ", origin=" + origin + ", platform=" + platform + ", id=" + id + ", trainOperatorID=" + trainOperatorID + ", destination=" + destination + ", plannedDeparture=" + plannedDeparture + ", actualDeparture=" + actualDeparture + '}';
+    }
+    
+    public List<String> toList(){
+        List<String> service = new ArrayList<>();
+        
+        service.add(ind);
+        service.add(plannedArrival);
+        service.add(actualArrival);
+        service.add(origin);
+        service.add(platform);
+        service.add(id);
+        service.add(trainOperatorID);
+        service.add(destination);
+        service.add(plannedDeparture);
+        service.add(actualDeparture);
+        
+        return service;
     }
 
     /**

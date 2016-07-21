@@ -11,6 +11,7 @@ import java.util.Calendar;
 import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -23,6 +24,11 @@ public class MainDisplay extends javax.swing.JFrame {
      */
     public MainDisplay() {
         initComponents();
+
+        Calendar date = Calendar.getInstance();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        
+        txtDate.setText(sdf.format(date.getTime()));
     }
 
     /**
@@ -41,7 +47,9 @@ public class MainDisplay extends javax.swing.JFrame {
         txtDate = new javax.swing.JTextField();
         btnAccept = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblTimetable = new javax.swing.JTable();
+        lblDays = new javax.swing.JLabel();
+        spnDays = new javax.swing.JSpinner();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -60,23 +68,28 @@ public class MainDisplay extends javax.swing.JFrame {
             }
         });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblTimetable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "IND", "Planned Arrival", "Actual Arrival", "Origin", "Platform", "ID", "Train Operator", "Destination", "Planned Departure", "Actual Departure"
+                "IND", "Planned Arrival", "Actual Arrival", "Origin", "Platform", "ID", "Train Operator", "Destination", "Planned Departure", "Actual Departure", "Date"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false, true, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        tblTimetable.setPreferredSize(new java.awt.Dimension(894, 338));
+        jScrollPane1.setViewportView(tblTimetable);
+
+        lblDays.setText("Days:");
+
+        spnDays.setValue(1);
 
         javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
         mainPanel.setLayout(mainPanelLayout);
@@ -95,6 +108,10 @@ public class MainDisplay extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtDate, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lblDays)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(spnDays, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnAccept)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
@@ -108,19 +125,19 @@ public class MainDisplay extends javax.swing.JFrame {
                     .addComponent(cmbStation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblDate)
                     .addComponent(txtDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnAccept))
+                    .addComponent(btnAccept)
+                    .addComponent(lblDays)
+                    .addComponent(spnDays, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 310, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(mainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -137,10 +154,20 @@ public class MainDisplay extends javax.swing.JFrame {
             Calendar date = Calendar.getInstance();
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
             date.setTime(sdf.parse(txtDate.getText()));
-            
+
             Station station = Station.findStationFromName(cmbStation.getSelectedItem().toString());
-            
-            DayTimetable timetable = new DayTimetable(station, date);
+
+            DaysTimetable timetable = new DaysTimetable(station, date, Integer.parseInt(spnDays.getValue().toString()));
+            timetable.getTimetable();
+
+            DefaultTableModel model = (DefaultTableModel) tblTimetable.getModel();
+
+            model.setRowCount(0);
+            for (DayTimetable day : timetable.getDays()) {
+                for (Object[] service : day.getDatedServices()) {
+                    model.addRow(service);
+                }
+            }
         } catch (ParseException ex) {
             Logger.getLogger(MainDisplay.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -185,10 +212,12 @@ public class MainDisplay extends javax.swing.JFrame {
     private javax.swing.JButton btnAccept;
     private javax.swing.JComboBox<String> cmbStation;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lblDate;
+    private javax.swing.JLabel lblDays;
     private javax.swing.JLabel lblStation;
     private javax.swing.JPanel mainPanel;
+    private javax.swing.JSpinner spnDays;
+    private javax.swing.JTable tblTimetable;
     private javax.swing.JTextField txtDate;
     // End of variables declaration//GEN-END:variables
 }
