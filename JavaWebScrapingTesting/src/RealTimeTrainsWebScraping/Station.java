@@ -1,4 +1,6 @@
-package javawebscrapingtesting;
+package RealTimeTrainsWebScraping;
+
+import java.util.ArrayList;
 
 /**
  *
@@ -7,6 +9,8 @@ package javawebscrapingtesting;
 public class Station {
     private String name;
     private String codeName;
+    
+    private static ArrayList<Station> stations = new ArrayList<>();
     
     public Station(String name, String codeName){
         this.setCodeName(codeName);
@@ -44,5 +48,19 @@ public class Station {
     @Override
     public String toString() {
         return "Station{" + "name=" + name + ", codeName=" + codeName + '}';
+    }
+    
+        /**
+     * @return the stations
+     */
+    public static ArrayList<Station> getStations() {
+        return stations;
+    }
+
+    /**
+     * @param aStations the stations to set
+     */
+    public static void setStations(ArrayList<Station> aStations) {
+        stations = aStations;
     }
 }

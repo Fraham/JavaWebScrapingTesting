@@ -1,4 +1,4 @@
-package javawebscrapingtesting;
+package RealTimeTrainsWebScraping;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;

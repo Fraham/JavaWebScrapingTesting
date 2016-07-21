@@ -1,4 +1,4 @@
-package javawebscrapingtesting;
+package RealTimeTrainsWebScraping;
 
 import java.util.ArrayList;
 import org.jsoup.nodes.Element;
