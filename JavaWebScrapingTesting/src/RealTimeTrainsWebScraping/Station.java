@@ -16,6 +16,26 @@ public class Station {
         this.setCodeName(codeName);
         this.setName(name);
     }
+    
+    public static Station findStationFromName(String name){
+        for (Station station : stations) {
+            if(station.getName().equals(name)){
+                return station;
+            }
+        }
+        
+        return null; // change to expection
+    }
+    
+    public static Station findStationFromID(String id){
+        for (Station station : stations) {
+            if(station.getCodeName().equals(id)){
+                return station;
+            }
+        }
+        
+        return null; // change to expection
+    }
 
     /**
      * @return the name
