@@ -29,6 +29,8 @@ public class MainDisplay extends javax.swing.JFrame {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         
         txtDate.setText(sdf.format(date.getTime()));
+        
+        tblTimetable.setFillsViewportHeight(true);
     }
 
     /**
@@ -68,6 +70,10 @@ public class MainDisplay extends javax.swing.JFrame {
             }
         });
 
+        jScrollPane1.setMinimumSize(new java.awt.Dimension(100, 100));
+        jScrollPane1.setPreferredSize(new java.awt.Dimension(100, 100));
+
+        tblTimetable.setAutoCreateRowSorter(true);
         tblTimetable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -84,7 +90,8 @@ public class MainDisplay extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        tblTimetable.setPreferredSize(new java.awt.Dimension(894, 338));
+        tblTimetable.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
+        tblTimetable.setMaximumSize(new java.awt.Dimension(2147483647, 2147483647));
         jScrollPane1.setViewportView(tblTimetable);
 
         lblDays.setText("Days:");
@@ -98,7 +105,7 @@ public class MainDisplay extends javax.swing.JFrame {
             .addGroup(mainPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 874, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(mainPanelLayout.createSequentialGroup()
                         .addComponent(lblStation)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -113,7 +120,7 @@ public class MainDisplay extends javax.swing.JFrame {
                         .addComponent(spnDays, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnAccept)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 440, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         mainPanelLayout.setVerticalGroup(
