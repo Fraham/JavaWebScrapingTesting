@@ -5,6 +5,13 @@
  */
 package RealTimeTrainsWebScraping;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Graham
@@ -126,7 +133,17 @@ public class MainDisplay extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAcceptMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAcceptMouseClicked
-        // TODO add your handling code here:
+        try {
+            Calendar date = Calendar.getInstance();
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            date.setTime(sdf.parse(txtDate.getText()));
+            
+            Station station = Station.findStationFromName(cmbStation.getSelectedItem().toString());
+            
+            DayTimetable timetable = new DayTimetable(station, date);
+        } catch (ParseException ex) {
+            Logger.getLogger(MainDisplay.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnAcceptMouseClicked
 
     /**
