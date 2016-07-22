@@ -1,10 +1,5 @@
 package RealTimeTrainsWebScraping;
 
-import java.awt.BorderLayout;
-import java.util.Calendar;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-
 /**
  *
  * @author Graham
@@ -12,9 +7,6 @@ import javax.swing.JPanel;
 public class Driver {
 
     public Driver() {
-        /*WeekTimetable wt = new WeekTimetable(new Station("Rainford", "RNF"), Calendar.getInstance());
-        wt.getTimetable();
-        System.out.println(wt);*/
     }
 
     /**

@@ -54,8 +54,8 @@
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="lblStation" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="cmbStation" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="cmbStation" min="-2" pref="168" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
                           <Component id="lblDate" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="txtDate" min="-2" pref="85" max="-2" attributes="0"/>
@@ -67,7 +67,7 @@
                           <Component id="chkPassenger" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="chkFreight" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="280" max="32767" attributes="0"/>
+                          <EmptySpace pref="218" max="32767" attributes="0"/>
                           <Component id="btnAccept" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
                       </Group>
@@ -104,14 +104,6 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JComboBox" name="cmbStation">
-          <Properties>
-            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="2">
-                <StringItem index="0" value="Rainford"/>
-                <StringItem index="1" value="Wigan Wallgate"/>
-              </StringArray>
-            </Property>
-          </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>

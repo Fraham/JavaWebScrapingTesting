@@ -8,9 +8,9 @@ package RealTimeTrainsWebScraping;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -31,6 +31,12 @@ public class MainDisplay extends javax.swing.JFrame {
         txtDate.setText(sdf.format(date.getTime()));
         
         tblTimetable.setFillsViewportHeight(true);
+        
+        DefaultComboBoxModel<String> model = (DefaultComboBoxModel<String>)cmbStation.getModel();
+        
+        for(Station station : Station.getStations()){
+            model.addElement(station.getName());
+        }
     }
 
     /**
@@ -60,8 +66,6 @@ public class MainDisplay extends javax.swing.JFrame {
         mainPanel.setName("mainPanel"); // NOI18N
 
         lblStation.setText("Station:");
-
-        cmbStation.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Rainford", "Wigan Wallgate" }));
 
         lblDate.setText("Date:");
 
@@ -119,8 +123,8 @@ public class MainDisplay extends javax.swing.JFrame {
                     .addGroup(mainPanelLayout.createSequentialGroup()
                         .addComponent(lblStation)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cmbStation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(cmbStation, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblDate)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtDate, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -132,7 +136,7 @@ public class MainDisplay extends javax.swing.JFrame {
                         .addComponent(chkPassenger)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(chkFreight)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 280, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 218, Short.MAX_VALUE)
                         .addComponent(btnAccept)
                         .addGap(34, 34, 34))))
         );
