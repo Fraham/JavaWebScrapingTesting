@@ -65,26 +65,39 @@ public class Service {
         for (int i = 0; i < rawTDS.size(); i++) {
             Element element = rawTDS.get(i);
 
-            if (i == 0) {
-                newService.setInd(element.text());
-            } else if (i == 1) {
-                newService.setPlannedArrival(element.text());
-            } else if (i == 2) {
-                newService.setActualArrival(element.text());
-            } else if (i == 3) {
-                newService.setOrigin(element.text());
-            } else if (i == 4) {
-                newService.setPlatform(element.text());
-            } else if (i == 5) {
-                newService.setId(element.getElementsByTag("a").first().text());
-            } else if (i == 6) {
-                newService.setTrainOperatorID(element.text());
-            } else if (i == 7) {
-                newService.setDestination(element.text());
-            } else if (i == 8) {
-                newService.setPlannedDeparture(element.text());
-            } else if (i == 9) {
-                newService.setActualDeparture(element.text());
+            switch (i) {
+                case 0:
+                    newService.setInd(element.text());
+                    break;
+                case 1:
+                    newService.setPlannedArrival(element.text());
+                    break;
+                case 2:
+                    newService.setActualArrival(element.text());
+                    break;
+                case 3:
+                    newService.setOrigin(element.text());
+                    break;
+                case 4:
+                    newService.setPlatform(element.text());
+                    break;
+                case 5:
+                    newService.setId(element.getElementsByTag("a").first().text());
+                    break;
+                case 6:
+                    newService.setTrainOperatorID(element.text());
+                    break;
+                case 7:
+                    newService.setDestination(element.text());
+                    break;
+                case 8:
+                    newService.setPlannedDeparture(element.text());
+                    break;
+                case 9:
+                    newService.setActualDeparture(element.text());
+                    break;
+                default:
+                    break;
             }
         }
 

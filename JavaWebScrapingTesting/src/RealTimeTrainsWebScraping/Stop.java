@@ -1,24 +1,53 @@
 package RealTimeTrainsWebScraping;
 
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+
 /**
  *
  * @author Graham
  */
 public class Stop {
+
     private String location;
     private String platform;
-    private String arrival;
-    private String departure;
-    
+
+    private String workingArrival;
+    private String workingDeparture;
+
+    private String realTimeArrival;
+    private String realTimeDeparture;
+    private String realTimeDelay;
+
     private String line;
     private String path;
-    
+
     private String engineeringAllowance;
     private String pathingAllowance;
     private String performanceAllowance;
-    
-    public Stop(){
-        
+
+    public Stop(Element rawStop) {
+        processRawStop(rawStop);
+    }
+
+    private void processRawStop(Element rawStop) {
+
+        setLocation(rawStop.getElementsByClass("location").first().getElementsByTag("a").first().text());
+        setPlatform(rawStop.getElementsByClass("platform").first().text());
+
+        setWorkingArrival("");
+        setWorkingDeparture("");
+
+        setRealTimeArrival("");
+        setRealTimeDeparture("");
+        setRealTimeDelay("");
+
+        setLine(rawStop.getElementsByClass("line").first().text());
+        setPath(rawStop.getElementsByClass("path").first().text());
+
+        setEngineeringAllowance(rawStop.getElementsByClass("engineering").first().text());
+        setPathingAllowance(rawStop.getElementsByClass("pathing").first().text());
+        setPerformanceAllowance(rawStop.getElementsByClass("performance").first().text());
     }
 
     /**
@@ -47,34 +76,6 @@ public class Stop {
      */
     public void setPlatform(String platform) {
         this.platform = platform;
-    }
-
-    /**
-     * @return the arrival
-     */
-    public String getArrival() {
-        return arrival;
-    }
-
-    /**
-     * @param arrival the arrival to set
-     */
-    public void setArrival(String arrival) {
-        this.arrival = arrival;
-    }
-
-    /**
-     * @return the departure
-     */
-    public String getDeparture() {
-        return departure;
-    }
-
-    /**
-     * @param departure the departure to set
-     */
-    public void setDeparture(String departure) {
-        this.departure = departure;
     }
 
     /**
@@ -145,5 +146,75 @@ public class Stop {
      */
     public void setPerformanceAllowance(String performanceAllowance) {
         this.performanceAllowance = performanceAllowance;
+    }
+
+    /**
+     * @return the realTimeArrival
+     */
+    public String getRealTimeArrival() {
+        return realTimeArrival;
+    }
+
+    /**
+     * @param realTimeArrival the realTimeArrival to set
+     */
+    public void setRealTimeArrival(String realTimeArrival) {
+        this.realTimeArrival = realTimeArrival;
+    }
+
+    /**
+     * @return the realTimeDeparture
+     */
+    public String getRealTimeDeparture() {
+        return realTimeDeparture;
+    }
+
+    /**
+     * @param realTimeDeparture the realTimeDeparture to set
+     */
+    public void setRealTimeDeparture(String realTimeDeparture) {
+        this.realTimeDeparture = realTimeDeparture;
+    }
+
+    /**
+     * @return the realTimeDelay
+     */
+    public String getRealTimeDelay() {
+        return realTimeDelay;
+    }
+
+    /**
+     * @param realTimeDelay the realTimeDelay to set
+     */
+    public void setRealTimeDelay(String realTimeDelay) {
+        this.realTimeDelay = realTimeDelay;
+    }
+
+    /**
+     * @return the workingArrival
+     */
+    public String getWorkingArrival() {
+        return workingArrival;
+    }
+
+    /**
+     * @param workingArrival the workingArrival to set
+     */
+    public void setWorkingArrival(String workingArrival) {
+        this.workingArrival = workingArrival;
+    }
+
+    /**
+     * @return the workingDeparture
+     */
+    public String getWorkingDeparture() {
+        return workingDeparture;
+    }
+
+    /**
+     * @param workingDeparture the workingDeparture to set
+     */
+    public void setWorkingDeparture(String workingDeparture) {
+        this.workingDeparture = workingDeparture;
     }
 }
