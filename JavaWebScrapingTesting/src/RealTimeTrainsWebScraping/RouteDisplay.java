@@ -1,9 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package RealTimeTrainsWebScraping;
+
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -11,11 +8,27 @@ package RealTimeTrainsWebScraping;
  */
 public class RouteDisplay extends javax.swing.JFrame {
 
+    private Route displayedRoute;
+
     /**
      * Creates new form RouteDisplay
+     * @param route
      */
-    public RouteDisplay() {
+    public RouteDisplay(Route route) {
         initComponents();
+        setDisplayedRoute(route);
+
+        populateTable();
+    }
+
+    private void populateTable() {
+        DefaultTableModel model = (DefaultTableModel) tblRoute.getModel();
+        
+        model.setRowCount(0);
+
+        for (Object[] row : getDisplayedRoute().getStopsAsArrays()) {
+            model.addRow(row);
+        }
     }
 
     /**
@@ -29,12 +42,13 @@ public class RouteDisplay extends javax.swing.JFrame {
 
         mainPanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblRoute = new javax.swing.JTable();
         btnRefresh = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Route");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblRoute.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -42,18 +56,23 @@ public class RouteDisplay extends javax.swing.JFrame {
                 "Location", "Platform", "Working Arrival", "Working Depature", "Real Time Arrival", "Real Time Departure", "Real Time Delay", "Line", "Path", "Engineering Allowance", "Pathing Allowance", "Performance Allowance"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        tblRoute.setMaximumSize(new java.awt.Dimension(2147483647, 2147483647));
+        jScrollPane1.setViewportView(tblRoute);
 
         btnRefresh.setText("Refresh");
+        btnRefresh.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnRefreshMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
         mainPanel.setLayout(mainPanelLayout);
         mainPanelLayout.setHorizontalGroup(
             mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(mainPanelLayout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 889, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 899, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(btnRefresh)))
@@ -87,6 +106,12 @@ public class RouteDisplay extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnRefreshMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRefreshMouseClicked
+        getDisplayedRoute().refresh();
+        
+        populateTable();
+    }//GEN-LAST:event_btnRefreshMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -117,7 +142,7 @@ public class RouteDisplay extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new RouteDisplay().setVisible(true);
+                //new RouteDisplay().setVisible(true);
             }
         });
     }
@@ -125,7 +150,21 @@ public class RouteDisplay extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnRefresh;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JPanel mainPanel;
+    private javax.swing.JTable tblRoute;
     // End of variables declaration//GEN-END:variables
+
+    /**
+     * @return the displayedRoute
+     */
+    public Route getDisplayedRoute() {
+        return displayedRoute;
+    }
+
+    /**
+     * @param displayedRoute the displayedRoute to set
+     */
+    public void setDisplayedRoute(Route displayedRoute) {
+        this.displayedRoute = displayedRoute;
+    }
 }

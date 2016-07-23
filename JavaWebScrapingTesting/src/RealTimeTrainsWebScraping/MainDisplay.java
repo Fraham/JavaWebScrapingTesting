@@ -62,6 +62,7 @@ public class MainDisplay extends javax.swing.JFrame {
         chkFreight = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Fraham's Real Time Trains");
 
         mainPanel.setName("mainPanel"); // NOI18N
 

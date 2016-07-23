@@ -129,4 +129,14 @@ public class Route {
     public String toString() {
         return "Route{" + "stops=" + stops + ", scheduleInformation=" + scheduleInformation + ", operationalInformation=" + operationalInformation + ", realtimestatus=" + realtimestatus + ", URL=" + URL + '}';
     }
+    
+    public ArrayList<Object[]> getStopsAsArrays(){
+        ArrayList<Object[]> list = new ArrayList<>();
+        
+        for (Stop stop : getStops()){
+            list.add(stop.toArray());
+        }
+        
+        return list;
+    }
 }

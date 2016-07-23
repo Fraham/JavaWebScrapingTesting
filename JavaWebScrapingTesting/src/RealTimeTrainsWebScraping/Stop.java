@@ -36,18 +36,16 @@ public class Stop {
 
         setWorkingArrival(rawStop.getElementsByClass("wtt").first().text());
         setWorkingDeparture(rawStop.getElementsByClass("wtt").first().nextElementSibling().text());
-        
-        if (rawStop.getElementsByClass("realtime").first() != null){
+
+        if (rawStop.getElementsByClass("realtime").first() != null) {
             setRealTimeArrival(rawStop.getElementsByClass("realtime").first().text());
             setRealTimeDeparture(rawStop.getElementsByClass("realtime").first().nextElementSibling().text());
             setRealTimeDelay(rawStop.getElementsByClass("realtime").first().nextElementSibling().nextElementSibling().text());
-        }
-        else if (rawStop.getElementsByClass("time").first() != null){
+        } else if (rawStop.getElementsByClass("time").first() != null) {
             setRealTimeArrival("No Report");
             setRealTimeDeparture("No Report");
             setRealTimeDelay("No Report");
-        }
-        else{
+        } else {
             setRealTimeArrival("");
             setRealTimeDeparture("");
             setRealTimeDelay("");
@@ -232,5 +230,9 @@ public class Stop {
     @Override
     public String toString() {
         return "\nStop{" + "location=" + location + ", platform=" + platform + ", workingArrival=" + workingArrival + ", workingDeparture=" + workingDeparture + ", realTimeArrival=" + realTimeArrival + ", realTimeDeparture=" + realTimeDeparture + ", realTimeDelay=" + realTimeDelay + ", line=" + line + ", path=" + path + ", engineeringAllowance=" + engineeringAllowance + ", pathingAllowance=" + pathingAllowance + ", performanceAllowance=" + performanceAllowance + "}";
+    }
+
+    public Object[] toArray() {
+        return new Object[]{location, platform, workingArrival, workingDeparture, realTimeArrival, realTimeDeparture, realTimeDelay, line, path, engineeringAllowance, pathingAllowance, performanceAllowance};
     }
 }

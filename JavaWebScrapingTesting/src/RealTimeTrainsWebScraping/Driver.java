@@ -21,10 +21,15 @@ public class Driver {
         Station.getStations().add(new Station("Wigan Wallgate", "WGW"));
         Station.getStations().add(new Station("Wigan North Western", "WGN"));
         Station.getStations().add(new Station("Lancaster", "LAN"));
-        
+
         try {
             Route route = new Route("http://www.realtimetrains.co.uk/train/H38485/2016/07/20/advanced");
             System.out.println(route.toString());
+            java.awt.EventQueue.invokeLater(new Runnable() {
+                public void run() {
+                    new RouteDisplay(route).setVisible(true);
+                }
+            });
         } catch (IOException ex) {
             Logger.getLogger(Driver.class.getName()).log(Level.SEVERE, null, ex);
         }
