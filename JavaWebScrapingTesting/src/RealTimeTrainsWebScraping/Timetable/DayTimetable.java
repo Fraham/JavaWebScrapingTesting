@@ -1,5 +1,6 @@
-package RealTimeTrainsWebScraping;
+package RealTimeTrainsWebScraping.Timetable;
 
+import RealTimeTrainsWebScraping.Station;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;

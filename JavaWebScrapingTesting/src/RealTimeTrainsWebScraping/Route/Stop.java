@@ -1,4 +1,4 @@
-package RealTimeTrainsWebScraping;
+package RealTimeTrainsWebScraping.Route;
 
 import org.jsoup.nodes.Element;
 

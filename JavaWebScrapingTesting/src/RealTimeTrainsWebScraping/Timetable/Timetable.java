@@ -1,5 +1,6 @@
-package RealTimeTrainsWebScraping;
+package RealTimeTrainsWebScraping.Timetable;
 
+import RealTimeTrainsWebScraping.Station;
 import java.util.ArrayList;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;

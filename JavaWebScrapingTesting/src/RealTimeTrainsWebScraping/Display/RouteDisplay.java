@@ -1,5 +1,6 @@
-package RealTimeTrainsWebScraping;
+package RealTimeTrainsWebScraping.Display;
 
+import RealTimeTrainsWebScraping.Route.Route;
 import javax.swing.table.DefaultTableModel;
 
 /**

@@ -1,4 +1,4 @@
-package RealTimeTrainsWebScraping;
+package RealTimeTrainsWebScraping.Route;
 
 import java.io.IOException;
 import java.util.ArrayList;

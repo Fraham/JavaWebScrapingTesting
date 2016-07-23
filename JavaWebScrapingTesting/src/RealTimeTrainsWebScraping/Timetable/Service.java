@@ -1,4 +1,4 @@
-package RealTimeTrainsWebScraping;
+package RealTimeTrainsWebScraping.Timetable;
 
 import java.util.ArrayList;
 import java.util.List;

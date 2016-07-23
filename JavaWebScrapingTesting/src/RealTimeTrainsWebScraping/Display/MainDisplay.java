@@ -3,8 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package RealTimeTrainsWebScraping;
+package RealTimeTrainsWebScraping.Display;
 
+import RealTimeTrainsWebScraping.Timetable.DayTimetable;
+import RealTimeTrainsWebScraping.Timetable.DaysTimetable;
+import RealTimeTrainsWebScraping.Station;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -86,11 +89,11 @@ public class MainDisplay extends javax.swing.JFrame {
 
             },
             new String [] {
-                "IND", "Planned Arrival", "Actual Arrival", "Origin", "Platform", "ID", "Train Operator", "Destination", "Planned Departure", "Actual Departure", "Date"
+                "IND", "Planned Arrival", "Actual Arrival", "Origin", "Platform", "ID", "Train Operator", "Destination", "Planned Departure", "Actual Departure", "Date", "Route"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false, true, true
+                false, false, false, false, false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {

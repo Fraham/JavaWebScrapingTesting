@@ -1,5 +1,8 @@
-package RealTimeTrainsWebScraping;
+package RealTimeTrainsWebScraping.Timetable;
 
+import RealTimeTrainsWebScraping.Station;
+import RealTimeTrainsWebScraping.Timetable.DaysTimetable;
+import RealTimeTrainsWebScraping.Timetable.DayTimetable;
 import java.util.ArrayList;
 import java.util.Calendar;
 
