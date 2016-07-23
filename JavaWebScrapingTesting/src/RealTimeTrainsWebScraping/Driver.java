@@ -1,5 +1,9 @@
 package RealTimeTrainsWebScraping;
 
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Graham
@@ -17,6 +21,13 @@ public class Driver {
         Station.getStations().add(new Station("Wigan Wallgate", "WGW"));
         Station.getStations().add(new Station("Wigan North Western", "WGN"));
         Station.getStations().add(new Station("Lancaster", "LAN"));
+        
+        try {
+            Route route = new Route("http://www.realtimetrains.co.uk/train/H38485/2016/07/20/advanced");
+            System.out.println(route.toString());
+        } catch (IOException ex) {
+            Logger.getLogger(Driver.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {

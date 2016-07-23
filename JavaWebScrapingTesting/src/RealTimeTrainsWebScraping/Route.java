@@ -23,8 +23,10 @@ public class Route {
 
     private String URL;
 
-    public Route(String URL) {
+    public Route(String URL) throws IOException {
         setURL(URL);
+        
+        processRoute();
     }
 
     public void processRoute() throws IOException {
@@ -121,5 +123,10 @@ public class Route {
      */
     public void setURL(String URL) {
         this.URL = URL;
+    }
+
+    @Override
+    public String toString() {
+        return "Route{" + "stops=" + stops + ", scheduleInformation=" + scheduleInformation + ", operationalInformation=" + operationalInformation + ", realtimestatus=" + realtimestatus + ", URL=" + URL + '}';
     }
 }

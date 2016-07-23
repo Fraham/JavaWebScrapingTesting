@@ -1,7 +1,6 @@
 package RealTimeTrainsWebScraping;
 
 import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
 
 /**
  *
@@ -35,12 +34,24 @@ public class Stop {
         setLocation(rawStop.getElementsByClass("location").first().getElementsByTag("a").first().text());
         setPlatform(rawStop.getElementsByClass("platform").first().text());
 
-        setWorkingArrival("");
-        setWorkingDeparture("");
-
-        setRealTimeArrival("");
-        setRealTimeDeparture("");
-        setRealTimeDelay("");
+        setWorkingArrival(rawStop.getElementsByClass("wtt").first().text());
+        setWorkingDeparture(rawStop.getElementsByClass("wtt").first().nextElementSibling().text());
+        
+        if (rawStop.getElementsByClass("realtime").first() != null){
+            setRealTimeArrival(rawStop.getElementsByClass("realtime").first().text());
+            setRealTimeDeparture(rawStop.getElementsByClass("realtime").first().nextElementSibling().text());
+            setRealTimeDelay(rawStop.getElementsByClass("realtime").first().nextElementSibling().nextElementSibling().text());
+        }
+        else if (rawStop.getElementsByClass("time").first() != null){
+            setRealTimeArrival("No Report");
+            setRealTimeDeparture("No Report");
+            setRealTimeDelay("No Report");
+        }
+        else{
+            setRealTimeArrival("");
+            setRealTimeDeparture("");
+            setRealTimeDelay("");
+        }
 
         setLine(rawStop.getElementsByClass("line").first().text());
         setPath(rawStop.getElementsByClass("path").first().text());
@@ -216,5 +227,10 @@ public class Stop {
      */
     public void setWorkingDeparture(String workingDeparture) {
         this.workingDeparture = workingDeparture;
+    }
+
+    @Override
+    public String toString() {
+        return "\nStop{" + "location=" + location + ", platform=" + platform + ", workingArrival=" + workingArrival + ", workingDeparture=" + workingDeparture + ", realTimeArrival=" + realTimeArrival + ", realTimeDeparture=" + realTimeDeparture + ", realTimeDelay=" + realTimeDelay + ", line=" + line + ", path=" + path + ", engineeringAllowance=" + engineeringAllowance + ", pathingAllowance=" + pathingAllowance + ", performanceAllowance=" + performanceAllowance + "}";
     }
 }
