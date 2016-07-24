@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package RealTimeTrainsWebScraping.Display;
 
 import RealTimeTrainsWebScraping.Timetable.DayTimetable;
@@ -14,7 +9,9 @@ import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.table.DefaultTableModel;
+import RealTimeTrainsWebScraping.Display.Table.*;
+import java.util.Arrays;
+import javax.swing.table.TableCellRenderer;
 
 /**
  *
@@ -30,16 +27,22 @@ public class MainDisplay extends javax.swing.JFrame {
 
         Calendar date = Calendar.getInstance();
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        
+
         txtDate.setText(sdf.format(date.getTime()));
-        
+
         tblTimetable.setFillsViewportHeight(true);
-        
-        DefaultComboBoxModel<String> model = (DefaultComboBoxModel<String>)cmbStation.getModel();
-        
-        for(Station station : Station.getStations()){
+
+        DefaultComboBoxModel<String> model = (DefaultComboBoxModel<String>) cmbStation.getModel();
+
+        for (Station station : Station.getStations()) {
             model.addElement(station.getName());
         }
+        
+        TableCellRenderer defaultRenderer;
+        
+        defaultRenderer = tblTimetable.getDefaultRenderer(RealTimeTrainsWebScraping.Display.Table.Button.class);
+        tblTimetable.setDefaultRenderer(RealTimeTrainsWebScraping.Display.Table.Button.class, new Render(defaultRenderer));
+        tblTimetable.addMouseListener(new ButtonMouseListener(tblTimetable));
     }
 
     /**
@@ -84,22 +87,7 @@ public class MainDisplay extends javax.swing.JFrame {
         jScrollPane1.setPreferredSize(new java.awt.Dimension(100, 100));
 
         tblTimetable.setAutoCreateRowSorter(true);
-        tblTimetable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "IND", "Planned Arrival", "Actual Arrival", "Origin", "Platform", "ID", "Train Operator", "Destination", "Planned Departure", "Actual Departure", "Date", "Route"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false, false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
+        tblTimetable.setModel(new Model());
         tblTimetable.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
         tblTimetable.setMaximumSize(new java.awt.Dimension(2147483647, 2147483647));
         jScrollPane1.setViewportView(tblTimetable);
@@ -186,23 +174,23 @@ public class MainDisplay extends javax.swing.JFrame {
             date.setTime(sdf.parse(txtDate.getText()));
 
             Station station = Station.findStationFromName(cmbStation.getSelectedItem().toString());
-            
+
             boolean passenger = chkPassenger.isSelected();
             boolean freight = chkFreight.isSelected();
-            
-            if (!passenger  && !freight){
+
+            if (!passenger && !freight) {
                 //error
             }
 
             DaysTimetable timetable = new DaysTimetable(station, date, Integer.parseInt(spnDays.getValue().toString()), passenger, freight);
             timetable.getTimetable();
 
-            DefaultTableModel model = (DefaultTableModel) tblTimetable.getModel();
+            Model model = (Model) tblTimetable.getModel();
 
-            model.setRowCount(0);
+            model.clear();
             for (DayTimetable day : timetable.getDays()) {
                 for (Object[] service : day.getDatedServices()) {
-                    model.addRow(service);
+                    model.addRow(Arrays.asList(service));
                 }
             }
         } catch (ParseException ex) {

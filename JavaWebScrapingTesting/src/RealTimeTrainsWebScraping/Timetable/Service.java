@@ -1,7 +1,9 @@
 package RealTimeTrainsWebScraping.Timetable;
 
+import RealTimeTrainsWebScraping.Display.Table.Button;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JButton;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
@@ -21,12 +23,14 @@ public class Service {
     private String destination;
     private String plannedDeparture;
     private String actualDeparture;
+    
+    private String routeURL;
 
     public Service() {
 
     }
 
-    public Service(String ind, String plannedArrival, String actualArrival, String origin, String platform, String id, String trainOperatorID, String destination, String plannedDeparture, String actualDeparture) {
+    public Service(String ind, String plannedArrival, String actualArrival, String origin, String platform, String id, String trainOperatorID, String destination, String plannedDeparture, String actualDeparture, String routeURL) {
         this.ind = ind;
         this.plannedArrival = plannedArrival;
         this.actualArrival = actualArrival;
@@ -37,6 +41,7 @@ public class Service {
         this.destination = destination;
         this.plannedDeparture = plannedDeparture;
         this.actualDeparture = actualDeparture;
+        this.routeURL = routeURL;
     }
     
     public Service(Service newService){
@@ -50,6 +55,7 @@ public class Service {
         this.destination = newService.getDestination();
         this.plannedDeparture = newService.getPlannedDeparture();
         this.actualDeparture = newService.getActualDeparture();
+        this.routeURL = newService.getRouteURL();
     }
 
     public Service(Element rawService) {
@@ -83,6 +89,7 @@ public class Service {
                     break;
                 case 5:
                     newService.setId(element.getElementsByTag("a").first().text());
+                    newService.setRouteURL(element.select("a").first().attr("abs:href"));
                     break;
                 case 6:
                     newService.setTrainOperatorID(element.text());
@@ -109,8 +116,8 @@ public class Service {
         return "\n" + "Service{" + "ind=" + ind + ", plannedArrival=" + plannedArrival + ", actualArrival=" + actualArrival + ", origin=" + origin + ", platform=" + platform + ", id=" + id + ", trainOperatorID=" + trainOperatorID + ", destination=" + destination + ", plannedDeparture=" + plannedDeparture + ", actualDeparture=" + actualDeparture + '}';
     }
     
-    public List<String> toList(){
-        List<String> service = new ArrayList<>();
+    public List<Object> toList(){
+        List<Object> service = new ArrayList<>();
         
         service.add(ind);
         service.add(plannedArrival);
@@ -122,6 +129,7 @@ public class Service {
         service.add(destination);
         service.add(plannedDeparture);
         service.add(actualDeparture);
+        service.add(new Button(routeURL));
         
         return service;
     }
@@ -264,5 +272,19 @@ public class Service {
      */
     public void setActualDeparture(String actualDeparture) {
         this.actualDeparture = actualDeparture;
+    }
+
+    /**
+     * @return the routeURL
+     */
+    public String getRouteURL() {
+        return routeURL;
+    }
+
+    /**
+     * @param routeURL the routeURL to set
+     */
+    public void setRouteURL(String routeURL) {
+        this.routeURL = routeURL;
     }
 }
