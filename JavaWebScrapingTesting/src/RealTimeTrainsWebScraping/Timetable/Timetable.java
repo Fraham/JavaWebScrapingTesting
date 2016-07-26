@@ -19,12 +19,12 @@ public class Timetable {
     }
 
     public Timetable(ArrayList<Service> newTimetable, Station station) {
-        this.setServices(newTimetable);
-        this.setStation(station);
+        setServices(newTimetable);
+        setStation(station);
     }
 
     public Timetable(Station station) {
-        this.setStation(station);
+        setStation(station);
     }
 
     /**

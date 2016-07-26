@@ -10,7 +10,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import RealTimeTrainsWebScraping.Display.Table.*;
+import RealTimeTrainsWebScraping.Exception.NoTrainsExeception;
+import java.io.IOException;
 import java.util.Arrays;
+import javax.swing.JOptionPane;
 import javax.swing.table.TableCellRenderer;
 
 /**
@@ -37,9 +40,9 @@ public class MainDisplay extends javax.swing.JFrame {
         for (Station station : Station.getStations()) {
             model.addElement(station.getName());
         }
-        
+
         TableCellRenderer defaultRenderer;
-        
+
         defaultRenderer = tblTimetable.getDefaultRenderer(RealTimeTrainsWebScraping.Display.Table.Button.class);
         tblTimetable.setDefaultRenderer(RealTimeTrainsWebScraping.Display.Table.Button.class, new Render(defaultRenderer));
         tblTimetable.addMouseListener(new ButtonMouseListener(tblTimetable));
@@ -78,8 +81,8 @@ public class MainDisplay extends javax.swing.JFrame {
 
         btnAccept.setText("Accept");
         btnAccept.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnAcceptMouseClicked(evt);
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btnAcceptMousePressed(evt);
             }
         });
 
@@ -167,7 +170,7 @@ public class MainDisplay extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnAcceptMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAcceptMouseClicked
+    private void btnAcceptMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAcceptMousePressed
         try {
             Calendar date = Calendar.getInstance();
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
@@ -179,11 +182,12 @@ public class MainDisplay extends javax.swing.JFrame {
             boolean freight = chkFreight.isSelected();
 
             if (!passenger && !freight) {
-                //error
+                JOptionPane.showMessageDialog(null, "Select either passenger or freight trains.", "Error", JOptionPane.WARNING_MESSAGE);
+                
+                return;
             }
 
             DaysTimetable timetable = new DaysTimetable(station, date, Integer.parseInt(spnDays.getValue().toString()), passenger, freight);
-            timetable.getTimetable();
 
             Model model = (Model) tblTimetable.getModel();
 
@@ -194,9 +198,13 @@ public class MainDisplay extends javax.swing.JFrame {
                 }
             }
         } catch (ParseException ex) {
-            Logger.getLogger(MainDisplay.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Unable to parse the date.", "Error", JOptionPane.WARNING_MESSAGE);
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(null, "Unable to connect to Real Time Trains.", "Error", JOptionPane.WARNING_MESSAGE);
+        } catch (NoTrainsExeception ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "Information", JOptionPane.WARNING_MESSAGE);
         }
-    }//GEN-LAST:event_btnAcceptMouseClicked
+    }//GEN-LAST:event_btnAcceptMousePressed
 
     /**
      * @param args the command line arguments

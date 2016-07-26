@@ -1,8 +1,7 @@
 package RealTimeTrainsWebScraping.Timetable;
 
 import RealTimeTrainsWebScraping.Station;
-import RealTimeTrainsWebScraping.Timetable.DaysTimetable;
-import RealTimeTrainsWebScraping.Timetable.DayTimetable;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -18,7 +17,7 @@ public class WeekTimetable extends DaysTimetable {
 
     private Station station;
 
-    public WeekTimetable(Station station, Calendar startDate, boolean passenger, boolean freight) {
+    public WeekTimetable(Station station, Calendar startDate, boolean passenger, boolean freight) throws IOException {
         super(station, startDate, 7, passenger, freight);
     }
 

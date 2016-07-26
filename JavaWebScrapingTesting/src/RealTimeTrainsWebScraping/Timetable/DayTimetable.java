@@ -1,13 +1,13 @@
 package RealTimeTrainsWebScraping.Timetable;
 
+import RealTimeTrainsWebScraping.Exception.NoTrainsExeception;
 import RealTimeTrainsWebScraping.Station;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -20,57 +20,55 @@ import org.jsoup.select.Elements;
 public class DayTimetable extends Timetable {
 
     private Calendar date;
-    
+
     private boolean passenger;
     private boolean freight;
 
-    public DayTimetable(Station station, Calendar date, boolean passenger, boolean freight) {
+    public DayTimetable(Station station, Calendar date, boolean passenger, boolean freight) throws IOException, NoTrainsExeception {
         super(station);
 
         setDate(date);
-        
+
         setPassenger(passenger);
         setFreight(freight);
+        
+        getDayTimetable();
     }
 
-    public void getDayTimetable() {
-        try {
-            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
-            
-            String show = "";
-            
-            if (passenger && freight){
-                show = "all";
-            }
-            else if (freight){
-                show = "non-passenger";
-            }
-            else if (passenger){
-                show = "passenger";
-            }
+    public void getDayTimetable() throws IOException, NoTrainsExeception {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
 
-            Document doc = Jsoup.connect(String.format("http://www.realtimetrains.co.uk/search/advanced/%s/%s/0000-2359?stp=WVS&show=%s&order=wtt", getStation().getCodeName(), dateFormat.format(date.getTime()), show)).get();
+        String show = "";
 
-            Elements tables = doc.getElementsByClass("table");
-            Element table = tables.first();
-            if (table != null) {
-                Element tbody = table.getElementsByTag("tbody").first();
-                setServices(Timetable.processRawTimetable(tbody));
-            }
-        } catch (IOException ex) {
-            Logger.getLogger(DayTimetable.class.getName()).log(Level.SEVERE, null, ex);
+        if (passenger && freight) {
+            show = "all";
+        } else if (freight) {
+            show = "non-passenger";
+        } else if (passenger) {
+            show = "passenger";
+        }
+
+        Document doc = Jsoup.connect(String.format("http://www.realtimetrains.co.uk/search/advanced/%s/%s/0000-2359?stp=WVS&show=%s&order=wtt", getStation().getCodeName(), dateFormat.format(date.getTime()), show)).get();
+
+        Elements tables = doc.getElementsByClass("table");
+        Element table = tables.first();
+        if (table != null) {
+            Element tbody = table.getElementsByTag("tbody").first();
+            setServices(Timetable.processRawTimetable(tbody));
+        } else {
+            throw new NoTrainsExeception("No trains for this station and date.");
         }
     }
-    
-    public List<Object []> getDatedServices(){
-        List<Object []> datedServices = new ArrayList<>();
-        
+
+    public List<Object[]> getDatedServices() {
+        List<Object[]> datedServices = new ArrayList<>();
+
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-            
-        for (Service service : getServices()){
+
+        for (Service service : getServices()) {
             List list = service.toList();
             list.add(sdf.format(date.getTime()));
-            datedServices.add(list.toArray());                    
+            datedServices.add(list.toArray());
         }
         return datedServices;
     }

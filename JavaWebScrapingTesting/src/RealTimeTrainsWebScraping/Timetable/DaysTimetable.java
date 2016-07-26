@@ -1,6 +1,8 @@
 package RealTimeTrainsWebScraping.Timetable;
 
+import RealTimeTrainsWebScraping.Exception.NoTrainsExeception;
 import RealTimeTrainsWebScraping.Station;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -21,23 +23,24 @@ public class DaysTimetable {
     private boolean passenger;
     private boolean freight;
 
-    public DaysTimetable(Station station, Calendar startDate, int numberOfDays, boolean passenger, boolean freight) {
+    public DaysTimetable(Station station, Calendar startDate, int numberOfDays, boolean passenger, boolean freight) throws IOException, NoTrainsExeception {
         this.setStartDate(startDate);
         this.setStation(station);
         this.setNumberOfDays(numberOfDays);
         
         setPassenger(passenger);
         setFreight(freight);
+        
+        getTimetable();
     }
 
-    public void getTimetable() {
+    public void getTimetable() throws IOException, NoTrainsExeception {
         setDays(new ArrayList<>());
 
         Calendar currentDate = (Calendar) this.getStartDate().clone();
 
         for (int i = 0; i < getNumberOfDays(); i++) {
             DayTimetable day = new DayTimetable(this.getStation(), (Calendar) currentDate.clone(), this.isPassenger(), this.isFreight());
-            day.getDayTimetable();
             getDays().add(day);
             
             currentDate.add(Calendar.DAY_OF_MONTH, 1);
