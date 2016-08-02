@@ -1,6 +1,7 @@
 package RealTimeTrainsWebScraping;
 
 import java.util.ArrayList;
+import RealTimeTrainsWebScraping.Exception.UnKnownStationException;
 
 /**
  *
@@ -17,24 +18,24 @@ public class Station {
         this.setName(name);
     }
     
-    public static Station findStationFromName(String name){
+    public static Station findStationFromName(String name) throws UnKnownStationException{
         for (Station station : stations) {
             if(station.getName().equals(name)){
                 return station;
             }
         }
         
-        return null; // change to expection
+        throw new UnKnownStationException("Unable to find station with name: " + name);
     }
     
-    public static Station findStationFromID(String id){
+    public static Station findStationFromID(String id) throws UnKnownStationException{
         for (Station station : stations) {
             if(station.getCodeName().equals(id)){
                 return station;
             }
         }
         
-        return null; // change to expection
+        throw new UnKnownStationException("Unable to find station with ID: " + id);
     }
 
     /**

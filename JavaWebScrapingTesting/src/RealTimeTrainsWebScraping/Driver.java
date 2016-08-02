@@ -19,6 +19,7 @@ public class Driver {
         Station.getStations().add(new Station("Wigan Wallgate", "WGW"));
         Station.getStations().add(new Station("Wigan North Western", "WGN"));
         Station.getStations().add(new Station("Lancaster", "LAN"));
+        Station.getStations().add(new Station("Birchwood", "BWD"));
 
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {

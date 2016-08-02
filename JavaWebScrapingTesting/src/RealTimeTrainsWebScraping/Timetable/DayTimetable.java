@@ -56,7 +56,7 @@ public class DayTimetable extends Timetable {
             Element tbody = table.getElementsByTag("tbody").first();
             setServices(Timetable.processRawTimetable(tbody));
         } else {
-            throw new NoTrainsExeception("No trains for this station and date.");
+            //throw new NoTrainsExeception("No trains for this station and date.");
         }
     }
 

@@ -11,6 +11,7 @@ import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import RealTimeTrainsWebScraping.Display.Table.*;
 import RealTimeTrainsWebScraping.Exception.NoTrainsExeception;
+import RealTimeTrainsWebScraping.Exception.UnKnownStationException;
 import java.io.IOException;
 import java.util.Arrays;
 import javax.swing.JOptionPane;
@@ -203,6 +204,8 @@ public class MainDisplay extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Unable to connect to Real Time Trains.", "Error", JOptionPane.WARNING_MESSAGE);
         } catch (NoTrainsExeception ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage(), "Information", JOptionPane.WARNING_MESSAGE);
+        } catch (UnKnownStationException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_btnAcceptMousePressed
 
