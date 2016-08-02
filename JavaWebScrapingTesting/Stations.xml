@@ -1,0 +1,30 @@
+<list>
+  <RealTimeTrainsWebScraping.Station>
+    <name>Rainford</name>
+    <codeName>RNF</codeName>
+  </RealTimeTrainsWebScraping.Station>
+  <RealTimeTrainsWebScraping.Station>
+    <name>Wigan Wallgate</name>
+    <codeName>WGW</codeName>
+  </RealTimeTrainsWebScraping.Station>
+  <RealTimeTrainsWebScraping.Station>
+    <name>Wigan North Western</name>
+    <codeName>WGN</codeName>
+  </RealTimeTrainsWebScraping.Station>
+  <RealTimeTrainsWebScraping.Station>
+    <name>Lancaster</name>
+    <codeName>LAN</codeName>
+  </RealTimeTrainsWebScraping.Station>
+  <RealTimeTrainsWebScraping.Station>
+    <name>Birchwood</name>
+    <codeName>BWD</codeName>
+  </RealTimeTrainsWebScraping.Station>
+  <RealTimeTrainsWebScraping.Station>
+    <name>Manchester Piccadilly</name>
+    <codeName>MAN</codeName>
+  </RealTimeTrainsWebScraping.Station>
+  <RealTimeTrainsWebScraping.Station>
+    <name>Manchester Victoria</name>
+    <codeName>MCV</codeName>
+  </RealTimeTrainsWebScraping.Station>
+</list>

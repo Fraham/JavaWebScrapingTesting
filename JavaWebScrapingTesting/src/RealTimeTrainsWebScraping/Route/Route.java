@@ -24,25 +24,39 @@ public class Route {
 
     private String URL;
 
-    public Route(String scheduleInformation, String operationalInformation, String realtimestatus, String URL) {
+    public Route(String scheduleInformation, String operationalInformation, String realtimestatus, String URL, ArrayList<Stop> stops) {
         this.scheduleInformation = scheduleInformation;
         this.operationalInformation = operationalInformation;
         this.realtimestatus = realtimestatus;
         this.URL = URL;
+        this.stops = stops;
+    }
+
+    public Route(String scheduleInformation, String operationalInformation, String realtimestatus, String URL, String stopsString) {
+        this.scheduleInformation = scheduleInformation;
+        this.operationalInformation = operationalInformation;
+        this.realtimestatus = realtimestatus;
+        this.URL = URL;
+        Document doc = Jsoup.parse(stopsString);
+        processRouteTable(doc.getAllElements());
     }
 
     public Route(String URL) throws IOException {
         setURL(URL);
-        
+
         processRoute();
     }
 
     public void processRoute() throws IOException {
         Document doc = Jsoup.connect(String.format(getURL())).get();
-        
-        //get the additional data
 
+        //get the additional data
         Elements tables = doc.getElementsByClass("table");
+        processRouteTable(tables);
+    }
+
+    public void processRouteTable(Elements tables) {
+        stops = new ArrayList();
         Element table = tables.first();
         if (table != null) {
             Element tbody = table.getElementsByTag("tbody").first();
@@ -54,8 +68,8 @@ public class Route {
             }
         }
     }
-    
-    public void refresh(){
+
+    public void refresh() {
         try {
             processRoute();
         } catch (IOException ex) {
@@ -137,14 +151,14 @@ public class Route {
     public String toString() {
         return "Route{" + "stops=" + stops + ", scheduleInformation=" + scheduleInformation + ", operationalInformation=" + operationalInformation + ", realtimestatus=" + realtimestatus + ", URL=" + URL + '}';
     }
-    
-    public ArrayList<Object[]> getStopsAsArrays(){
+
+    public ArrayList<Object[]> getStopsAsArrays() {
         ArrayList<Object[]> list = new ArrayList<>();
-        
-        for (Stop stop : getStops()){
+
+        for (Stop stop : getStops()) {
             list.add(stop.toArray());
         }
-        
+
         return list;
     }
 
@@ -188,6 +202,5 @@ public class Route {
         }
         return true;
     }
-    
-    
+
 }

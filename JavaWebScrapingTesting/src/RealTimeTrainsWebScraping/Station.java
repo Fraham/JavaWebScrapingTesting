@@ -2,13 +2,21 @@ package RealTimeTrainsWebScraping;
 
 import java.util.ArrayList;
 import RealTimeTrainsWebScraping.Exception.UnKnownStationException;
+import com.thoughtworks.xstream.XStream;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.io.Serializable;
+import java.io.Writer;
 import java.util.Objects;
 
 /**
  *
  * @author Graham
  */
-public class Station {
+public class Station implements Serializable {
     private String name;
     private String codeName;
     
@@ -37,6 +45,28 @@ public class Station {
         }
         
         throw new UnKnownStationException("Unable to find station with ID: " + id);
+    }
+    
+    public static void saveFromFile(File fileToSaveTo) throws IOException{
+        XStream xstream = new XStream();
+        
+        try (Writer writer = new BufferedWriter(new OutputStreamWriter( new FileOutputStream(fileToSaveTo), "utf-8"))) {
+            writer.write(xstream.toXML(Station.getStations()));
+        }
+    }
+    
+    public static void saveFromFile() throws IOException{
+        saveFromFile(new File("Stations.xml"));
+    }
+    
+    public static void loadFromFile(File fileToLoadFrom){
+        XStream xstream = new XStream();
+        
+        Station.setStations((ArrayList<Station>)xstream.fromXML(new File("Stations.xml")));
+    }
+    
+    public static void loadFromFile(){
+        loadFromFile(new File("Stations.xml"));
     }
 
     /**
