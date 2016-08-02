@@ -2,6 +2,7 @@ package RealTimeTrainsWebScraping.Route;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.jsoup.Jsoup;
@@ -22,6 +23,13 @@ public class Route {
     private String realtimestatus;
 
     private String URL;
+
+    public Route(String scheduleInformation, String operationalInformation, String realtimestatus, String URL) {
+        this.scheduleInformation = scheduleInformation;
+        this.operationalInformation = operationalInformation;
+        this.realtimestatus = realtimestatus;
+        this.URL = URL;
+    }
 
     public Route(String URL) throws IOException {
         setURL(URL);
@@ -139,4 +147,47 @@ public class Route {
         
         return list;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 41 * hash + Objects.hashCode(this.stops);
+        hash = 41 * hash + Objects.hashCode(this.scheduleInformation);
+        hash = 41 * hash + Objects.hashCode(this.operationalInformation);
+        hash = 41 * hash + Objects.hashCode(this.realtimestatus);
+        hash = 41 * hash + Objects.hashCode(this.URL);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Route other = (Route) obj;
+        if (!Objects.equals(this.scheduleInformation, other.scheduleInformation)) {
+            return false;
+        }
+        if (!Objects.equals(this.operationalInformation, other.operationalInformation)) {
+            return false;
+        }
+        if (!Objects.equals(this.realtimestatus, other.realtimestatus)) {
+            return false;
+        }
+        if (!Objects.equals(this.URL, other.URL)) {
+            return false;
+        }
+        if (!Objects.equals(this.stops, other.stops)) {
+            return false;
+        }
+        return true;
+    }
+    
+    
 }

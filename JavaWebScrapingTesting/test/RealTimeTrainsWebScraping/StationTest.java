@@ -1,6 +1,5 @@
 package RealTimeTrainsWebScraping;
 
-import java.util.ArrayList;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -43,6 +42,7 @@ public class StationTest {
 
     /**
      * Test of findStationFromName method, of class Station.
+     * @throws java.lang.Exception
      */
     @Test
     public void testFindStationFromName() throws Exception {
@@ -81,6 +81,7 @@ public class StationTest {
 
     /**
      * Test of findStationFromID method, of class Station.
+     * @throws java.lang.Exception
      */
     @Test
     public void testFindStationFromID() throws Exception {
