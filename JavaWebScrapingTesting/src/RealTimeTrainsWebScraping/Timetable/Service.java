@@ -3,7 +3,7 @@ package RealTimeTrainsWebScraping.Timetable;
 import RealTimeTrainsWebScraping.Display.Table.Button;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.JButton;
+import java.util.Objects;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
@@ -287,4 +287,71 @@ public class Service {
     public void setRouteURL(String routeURL) {
         this.routeURL = routeURL;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 17 * hash + Objects.hashCode(this.ind);
+        hash = 17 * hash + Objects.hashCode(this.plannedArrival);
+        hash = 17 * hash + Objects.hashCode(this.actualArrival);
+        hash = 17 * hash + Objects.hashCode(this.origin);
+        hash = 17 * hash + Objects.hashCode(this.platform);
+        hash = 17 * hash + Objects.hashCode(this.id);
+        hash = 17 * hash + Objects.hashCode(this.trainOperatorID);
+        hash = 17 * hash + Objects.hashCode(this.destination);
+        hash = 17 * hash + Objects.hashCode(this.plannedDeparture);
+        hash = 17 * hash + Objects.hashCode(this.actualDeparture);
+        hash = 17 * hash + Objects.hashCode(this.routeURL);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Service other = (Service) obj;
+        if (!Objects.equals(this.ind, other.ind)) {
+            return false;
+        }
+        if (!Objects.equals(this.plannedArrival, other.plannedArrival)) {
+            return false;
+        }
+        if (!Objects.equals(this.actualArrival, other.actualArrival)) {
+            return false;
+        }
+        if (!Objects.equals(this.origin, other.origin)) {
+            return false;
+        }
+        if (!Objects.equals(this.platform, other.platform)) {
+            return false;
+        }
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        if (!Objects.equals(this.trainOperatorID, other.trainOperatorID)) {
+            return false;
+        }
+        if (!Objects.equals(this.destination, other.destination)) {
+            return false;
+        }
+        if (!Objects.equals(this.plannedDeparture, other.plannedDeparture)) {
+            return false;
+        }
+        if (!Objects.equals(this.actualDeparture, other.actualDeparture)) {
+            return false;
+        }
+        if (!Objects.equals(this.routeURL, other.routeURL)) {
+            return false;
+        }
+        return true;
+    }
+    
+    
 }

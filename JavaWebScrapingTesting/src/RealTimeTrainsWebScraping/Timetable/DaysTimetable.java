@@ -5,6 +5,7 @@ import RealTimeTrainsWebScraping.Station;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Objects;
 
 /**
  *
@@ -24,9 +25,9 @@ public class DaysTimetable {
     private boolean freight;
 
     public DaysTimetable(Station station, Calendar startDate, int numberOfDays, boolean passenger, boolean freight) throws IOException, NoTrainsExeception {
-        this.setStartDate(startDate);
-        this.setStation(station);
-        this.setNumberOfDays(numberOfDays);
+        setStartDate(startDate);
+        setStation(station);
+        setNumberOfDays(numberOfDays);
         
         setPassenger(passenger);
         setFreight(freight);
@@ -135,4 +136,50 @@ public class DaysTimetable {
     public void setFreight(boolean freight) {
         this.freight = freight;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 71 * hash + Objects.hashCode(this.days);
+        hash = 71 * hash + Objects.hashCode(this.startDate);
+        hash = 71 * hash + Objects.hashCode(this.station);
+        hash = 71 * hash + this.numberOfDays;
+        hash = 71 * hash + (this.passenger ? 1 : 0);
+        hash = 71 * hash + (this.freight ? 1 : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final DaysTimetable other = (DaysTimetable) obj;
+        if (this.numberOfDays != other.numberOfDays) {
+            return false;
+        }
+        if (this.passenger != other.passenger) {
+            return false;
+        }
+        if (this.freight != other.freight) {
+            return false;
+        }
+        if (!Objects.equals(this.days, other.days)) {
+            return false;
+        }
+        if (!Objects.equals(this.startDate, other.startDate)) {
+            return false;
+        }
+        if (!Objects.equals(this.station, other.station)) {
+            return false;
+        }
+        return true;
+    }
+    
 }

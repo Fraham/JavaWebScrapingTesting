@@ -7,7 +7,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-import javax.swing.JOptionPane;
+import java.util.Objects;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -54,7 +54,7 @@ public class DayTimetable extends Timetable {
         Element table = tables.first();
         if (table != null) {
             Element tbody = table.getElementsByTag("tbody").first();
-            setServices(Timetable.processRawTimetable(tbody));
+            processRawTimetable(tbody);
         } else {
             //throw new NoTrainsExeception("No trains for this station and date.");
         }
@@ -118,6 +118,39 @@ public class DayTimetable extends Timetable {
      */
     public void setFreight(boolean freight) {
         this.freight = freight;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 29 * hash + Objects.hashCode(this.date);
+        hash = 29 * hash + (this.passenger ? 1 : 0);
+        hash = 29 * hash + (this.freight ? 1 : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final DayTimetable other = (DayTimetable) obj;
+        if (this.passenger != other.passenger) {
+            return false;
+        }
+        if (this.freight != other.freight) {
+            return false;
+        }
+        if (!Objects.equals(this.date, other.date)) {
+            return false;
+        }
+        return true;
     }
 
 }

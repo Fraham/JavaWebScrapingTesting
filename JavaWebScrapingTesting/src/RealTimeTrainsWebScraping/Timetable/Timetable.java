@@ -2,6 +2,7 @@ package RealTimeTrainsWebScraping.Timetable;
 
 import RealTimeTrainsWebScraping.Station;
 import java.util.ArrayList;
+import java.util.Objects;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
@@ -33,19 +34,18 @@ public class Timetable {
      * @param station
      */
     public Timetable(Element rawTimetable, Station station) {
-        this(processRawTimetable(rawTimetable), station);
+        processRawTimetable(rawTimetable);
+        setStation(station);
     }
 
-    public static ArrayList<Service> processRawTimetable(Element rawTimetable) {
-        ArrayList<Service> newService = new ArrayList<>();
+    public void processRawTimetable(Element rawTimetable) {
+        services = new ArrayList<>();
 
-        Elements services = rawTimetable.getElementsByTag("tr");
+        Elements servicesElements = rawTimetable.getElementsByTag("tr");
 
-        for (Element service : services) {
-            newService.add(Service.processRawData(service));
+        for (Element service : servicesElements) {
+            services.add(Service.processRawData(service));
         }
-
-        return newService;
     }
 
     /**
@@ -66,9 +66,10 @@ public class Timetable {
      * @return the services
      */
     public ArrayList<Service> getServices() {
-        if (services == null)
+        if (services == null) {
             services = new ArrayList<>();
-        
+        }
+
         return services;
     }
 
@@ -83,4 +84,34 @@ public class Timetable {
     public String toString() {
         return "Timetable{" + "station=" + station + ", services=" + services + '}';
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 23 * hash + Objects.hashCode(this.station);
+        hash = 23 * hash + Objects.hashCode(this.services);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Timetable other = (Timetable) obj;
+        if (!Objects.equals(this.station, other.station)) {
+            return false;
+        }
+        if (!Objects.equals(this.services, other.services)) {
+            return false;
+        }
+        return true;
+    }
+
 }

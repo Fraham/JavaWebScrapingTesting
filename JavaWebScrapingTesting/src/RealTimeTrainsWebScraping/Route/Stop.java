@@ -39,7 +39,7 @@ public class Stop {
         this.engineeringAllowance = engineeringAllowance;
         this.pathingAllowance = pathingAllowance;
         this.performanceAllowance = performanceAllowance;
-    }    
+    }
 
     public Stop(Element rawStop) {
         processRawStop(rawStop);
@@ -315,10 +315,7 @@ public class Stop {
         if (!Objects.equals(this.pathingAllowance, other.pathingAllowance)) {
             return false;
         }
-        if (!Objects.equals(this.performanceAllowance, other.performanceAllowance)) {
-            return false;
-        }
-        return true;
+        return Objects.equals(this.performanceAllowance, other.performanceAllowance);
     }
-    
+
 }
