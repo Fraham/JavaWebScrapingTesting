@@ -1,3 +1,3 @@
 language: java
-script: cd JavaWebScrapingTesting
+before_script: cd JavaWebScrapingTesting
 script: ant -file build.xml
