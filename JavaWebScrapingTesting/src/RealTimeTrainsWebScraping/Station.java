@@ -2,6 +2,7 @@ package RealTimeTrainsWebScraping;
 
 import java.util.ArrayList;
 import RealTimeTrainsWebScraping.Exception.UnKnownStationException;
+import java.util.Objects;
 
 /**
  *
@@ -20,7 +21,7 @@ public class Station {
     
     public static Station findStationFromName(String name) throws UnKnownStationException{
         for (Station station : stations) {
-            if(station.getName().equals(name)){
+            if(station.getName().toLowerCase().equals(name.toLowerCase())){
                 return station;
             }
         }
@@ -30,7 +31,7 @@ public class Station {
     
     public static Station findStationFromID(String id) throws UnKnownStationException{
         for (Station station : stations) {
-            if(station.getCodeName().equals(id)){
+            if(station.getCodeName().toLowerCase().equals(id.toLowerCase())){
                 return station;
             }
         }
@@ -84,4 +85,35 @@ public class Station {
     public static void setStations(ArrayList<Station> aStations) {
         stations = aStations;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 83 * hash + Objects.hashCode(this.name);
+        hash = 83 * hash + Objects.hashCode(this.codeName);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Station other = (Station) obj;
+        if (!Objects.equals(this.name, other.name)) {
+            return false;
+        }
+        if (!Objects.equals(this.codeName, other.codeName)) {
+            return false;
+        }
+        return true;
+    }
+    
+    
 }

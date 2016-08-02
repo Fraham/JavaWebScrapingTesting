@@ -6,8 +6,6 @@ import RealTimeTrainsWebScraping.Station;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import RealTimeTrainsWebScraping.Display.Table.*;
 import RealTimeTrainsWebScraping.Exception.NoTrainsExeception;
