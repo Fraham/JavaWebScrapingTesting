@@ -1,5 +1,6 @@
 package RealTimeTrainsWebScraping.Route;
 
+import java.util.Objects;
 import org.jsoup.nodes.Element;
 
 /**
@@ -24,6 +25,21 @@ public class Stop {
     private String engineeringAllowance;
     private String pathingAllowance;
     private String performanceAllowance;
+
+    public Stop(String location, String platform, String workingArrival, String workingDeparture, String realTimeArrival, String realTimeDeparture, String realTimeDelay, String line, String path, String engineeringAllowance, String pathingAllowance, String performanceAllowance) {
+        this.location = location;
+        this.platform = platform;
+        this.workingArrival = workingArrival;
+        this.workingDeparture = workingDeparture;
+        this.realTimeArrival = realTimeArrival;
+        this.realTimeDeparture = realTimeDeparture;
+        this.realTimeDelay = realTimeDelay;
+        this.line = line;
+        this.path = path;
+        this.engineeringAllowance = engineeringAllowance;
+        this.pathingAllowance = pathingAllowance;
+        this.performanceAllowance = performanceAllowance;
+    }    
 
     public Stop(Element rawStop) {
         processRawStop(rawStop);
@@ -235,4 +251,74 @@ public class Stop {
     public Object[] toArray() {
         return new Object[]{location, platform, workingArrival, workingDeparture, realTimeArrival, realTimeDeparture, realTimeDelay, line, path, engineeringAllowance, pathingAllowance, performanceAllowance};
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 53 * hash + Objects.hashCode(this.location);
+        hash = 53 * hash + Objects.hashCode(this.platform);
+        hash = 53 * hash + Objects.hashCode(this.workingArrival);
+        hash = 53 * hash + Objects.hashCode(this.workingDeparture);
+        hash = 53 * hash + Objects.hashCode(this.realTimeArrival);
+        hash = 53 * hash + Objects.hashCode(this.realTimeDeparture);
+        hash = 53 * hash + Objects.hashCode(this.realTimeDelay);
+        hash = 53 * hash + Objects.hashCode(this.line);
+        hash = 53 * hash + Objects.hashCode(this.path);
+        hash = 53 * hash + Objects.hashCode(this.engineeringAllowance);
+        hash = 53 * hash + Objects.hashCode(this.pathingAllowance);
+        hash = 53 * hash + Objects.hashCode(this.performanceAllowance);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Stop other = (Stop) obj;
+        if (!Objects.equals(this.location, other.location)) {
+            return false;
+        }
+        if (!Objects.equals(this.platform, other.platform)) {
+            return false;
+        }
+        if (!Objects.equals(this.workingArrival, other.workingArrival)) {
+            return false;
+        }
+        if (!Objects.equals(this.workingDeparture, other.workingDeparture)) {
+            return false;
+        }
+        if (!Objects.equals(this.realTimeArrival, other.realTimeArrival)) {
+            return false;
+        }
+        if (!Objects.equals(this.realTimeDeparture, other.realTimeDeparture)) {
+            return false;
+        }
+        if (!Objects.equals(this.realTimeDelay, other.realTimeDelay)) {
+            return false;
+        }
+        if (!Objects.equals(this.line, other.line)) {
+            return false;
+        }
+        if (!Objects.equals(this.path, other.path)) {
+            return false;
+        }
+        if (!Objects.equals(this.engineeringAllowance, other.engineeringAllowance)) {
+            return false;
+        }
+        if (!Objects.equals(this.pathingAllowance, other.pathingAllowance)) {
+            return false;
+        }
+        if (!Objects.equals(this.performanceAllowance, other.performanceAllowance)) {
+            return false;
+        }
+        return true;
+    }
+    
 }
