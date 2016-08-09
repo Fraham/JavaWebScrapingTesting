@@ -48,10 +48,7 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <Component id="jScrollPane1" max="32767" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                      </Group>
+                      <Component id="jScrollPane1" alignment="0" max="32767" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="lblStation" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
@@ -68,11 +65,13 @@
                           <Component id="chkPassenger" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="chkFreight" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="218" max="32767" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="btnAccept" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
+                          <EmptySpace pref="143" max="32767" attributes="0"/>
+                          <Component id="btnEditStations" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
+                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -90,6 +89,7 @@
                       <Component id="spnDays" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="chkPassenger" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="chkFreight" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnEditStations" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="jScrollPane1" pref="758" max="32767" attributes="0"/>
@@ -176,6 +176,14 @@
             <Property name="selected" type="boolean" value="true"/>
             <Property name="text" type="java.lang.String" value="Freight"/>
           </Properties>
+        </Component>
+        <Component class="javax.swing.JButton" name="btnEditStations">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Edit Stations"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEditStationsActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

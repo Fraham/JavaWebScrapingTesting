@@ -145,5 +145,7 @@ public class Station implements Serializable {
         return true;
     }
     
-    
+    public Object[] toArray(){
+        return new Object[] {name, codeName};
+    }
 }

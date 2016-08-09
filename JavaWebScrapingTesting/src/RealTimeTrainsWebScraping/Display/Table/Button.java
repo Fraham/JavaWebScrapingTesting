@@ -32,14 +32,25 @@ public class Button extends JButton implements ActionListener {
     public void showRoute() {
         try {
             Route route = new Route(routeURL);
+            
+            Thread processRouteThread = new Thread() {
+                public void run() {
+                    try {
+                        route.processRoute();
+                    } catch (IOException ex) {
+                        System.out.println(ex);
+                    }
+                }
+            };
+            processRouteThread.start();
             java.awt.EventQueue.invokeLater(new Runnable() {
                 @Override
                 public void run() {
-                    new RouteDisplay(route).setVisible(true);
+                    new RouteDisplay(route, processRouteThread).setVisible(true);
                 }
             });
         } catch (IOException ex) {
-            Logger.getLogger(Driver.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex);
         }
     }
 

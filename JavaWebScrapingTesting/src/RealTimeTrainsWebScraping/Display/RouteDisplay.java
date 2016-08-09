@@ -1,6 +1,8 @@
 package RealTimeTrainsWebScraping.Display;
 
 import RealTimeTrainsWebScraping.Route.Route;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -21,11 +23,32 @@ public class RouteDisplay extends javax.swing.JFrame {
 
         populateTable();
     }
+    
+        /**
+     * Creates new form RouteDisplay
+     * @param route
+     */
+    public RouteDisplay(Route route, Thread waitThread) {
+        initComponents();
+        setDisplayedRoute(route);
+        
+        try {
+            System.out.println("joined");
+            waitThread.join();
+            System.out.println("done");
+            
+            populateTable();
+        } catch (InterruptedException ex) {
+            System.out.println(ex);
+        }
+    }
 
     private void populateTable() {
         DefaultTableModel model = (DefaultTableModel) tblRoute.getModel();
         
         model.setRowCount(0);
+        
+        System.out.println(getDisplayedRoute().getStopsAsArrays().size());
 
         for (Object[] row : getDisplayedRoute().getStopsAsArrays()) {
             model.addRow(row);

@@ -44,7 +44,7 @@ public class Route {
     public Route(String URL) throws IOException {
         setURL(URL);
 
-        processRoute();
+        //processRoute();
     }
 
     public void processRoute() throws IOException {

@@ -68,6 +68,7 @@ public class MainDisplay extends javax.swing.JFrame {
         spnDays = new javax.swing.JSpinner();
         chkPassenger = new javax.swing.JCheckBox();
         chkFreight = new javax.swing.JCheckBox();
+        btnEditStations = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Fraham's Real Time Trains");
@@ -104,6 +105,13 @@ public class MainDisplay extends javax.swing.JFrame {
         chkFreight.setSelected(true);
         chkFreight.setText("Freight");
 
+        btnEditStations.setText("Edit Stations");
+        btnEditStations.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditStationsActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
         mainPanel.setLayout(mainPanelLayout);
         mainPanelLayout.setHorizontalGroup(
@@ -111,9 +119,7 @@ public class MainDisplay extends javax.swing.JFrame {
             .addGroup(mainPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(mainPanelLayout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(mainPanelLayout.createSequentialGroup()
                         .addComponent(lblStation)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -130,9 +136,11 @@ public class MainDisplay extends javax.swing.JFrame {
                         .addComponent(chkPassenger)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(chkFreight)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 218, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnAccept)
-                        .addGap(34, 34, 34))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 143, Short.MAX_VALUE)
+                        .addComponent(btnEditStations)))
+                .addContainerGap())
         );
         mainPanelLayout.setVerticalGroup(
             mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -147,7 +155,8 @@ public class MainDisplay extends javax.swing.JFrame {
                     .addComponent(lblDays)
                     .addComponent(spnDays, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(chkPassenger)
-                    .addComponent(chkFreight))
+                    .addComponent(chkFreight)
+                    .addComponent(btnEditStations))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 758, Short.MAX_VALUE)
                 .addContainerGap())
@@ -182,7 +191,7 @@ public class MainDisplay extends javax.swing.JFrame {
 
             if (!passenger && !freight) {
                 JOptionPane.showMessageDialog(null, "Select either passenger or freight trains.", "Error", JOptionPane.WARNING_MESSAGE);
-                
+
                 return;
             }
 
@@ -206,6 +215,14 @@ public class MainDisplay extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_btnAcceptMousePressed
+
+    private void btnEditStationsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditStationsActionPerformed
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new StationDisplay(Station.getStations()).setVisible(true);
+            }
+        });
+    }//GEN-LAST:event_btnEditStationsActionPerformed
 
     /**
      * @param args the command line arguments
@@ -244,6 +261,7 @@ public class MainDisplay extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAccept;
+    private javax.swing.JButton btnEditStations;
     private javax.swing.JCheckBox chkFreight;
     private javax.swing.JCheckBox chkPassenger;
     private javax.swing.JComboBox<String> cmbStation;
