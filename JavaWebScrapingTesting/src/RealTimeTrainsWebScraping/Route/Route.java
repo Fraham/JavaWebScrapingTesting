@@ -41,10 +41,8 @@ public class Route {
         processRouteTable(doc.getAllElements());
     }
 
-    public Route(String URL) throws IOException {
+    public Route(String URL) {
         setURL(URL);
-
-        //processRoute();
     }
 
     public void processRoute() throws IOException {
