@@ -23,7 +23,7 @@ public class Service {
     private String destination;
     private String plannedDeparture;
     private String actualDeparture;
-    
+
     private String routeURL;
 
     public Service() {
@@ -43,8 +43,8 @@ public class Service {
         this.actualDeparture = actualDeparture;
         this.routeURL = routeURL;
     }
-    
-    public Service(Service newService){
+
+    public Service(Service newService) {
         this.ind = newService.getInd();
         this.plannedArrival = newService.getPlannedArrival();
         this.actualArrival = newService.getActualArrival();
@@ -67,7 +67,7 @@ public class Service {
         Service newService = new Service();
 
         Elements rawTDS = rawService.getElementsByTag("td");
-        
+
         for (int i = 0; i < rawTDS.size(); i++) {
             Element element = rawTDS.get(i);
 
@@ -115,10 +115,10 @@ public class Service {
     public String toString() {
         return "\n" + "Service{" + "ind=" + ind + ", plannedArrival=" + plannedArrival + ", actualArrival=" + actualArrival + ", origin=" + origin + ", platform=" + platform + ", id=" + id + ", trainOperatorID=" + trainOperatorID + ", destination=" + destination + ", plannedDeparture=" + plannedDeparture + ", actualDeparture=" + actualDeparture + '}';
     }
-    
-    public List<Object> toList(){
+
+    public List<Object> toList() {
         List<Object> service = new ArrayList<>();
-        
+
         service.add(ind);
         service.add(plannedArrival);
         service.add(actualArrival);
@@ -130,7 +130,7 @@ public class Service {
         service.add(plannedDeparture);
         service.add(actualDeparture);
         service.add(new Button(routeURL));
-        
+
         return service;
     }
 
@@ -173,6 +173,10 @@ public class Service {
      * @param actualArrival the actualArrival to set
      */
     public void setActualArrival(String actualArrival) {
+        if (actualArrival.equals("N/R")) {
+            actualArrival = "No Report";
+        }
+        
         this.actualArrival = actualArrival;
     }
 
@@ -271,6 +275,10 @@ public class Service {
      * @param actualDeparture the actualDeparture to set
      */
     public void setActualDeparture(String actualDeparture) {
+        if (actualDeparture.equals("N/R")) {
+            actualDeparture = "No Report";
+        }
+
         this.actualDeparture = actualDeparture;
     }
 
@@ -352,6 +360,5 @@ public class Service {
         }
         return true;
     }
-    
-    
+
 }
